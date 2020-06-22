@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UniverseBox from "./UniverseBox";
+import UniverseSystem from "./UniverseSystem";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -80,7 +80,7 @@ class Universe extends Component{
                 <Header>
                     Generation: {this.state.generation}
                 </Header>
-                <UniverseBox clear = {this.state.clear} randomize = {this.state.randomize} gameOfLife = {this.state.gameOfLife} clearButton={this.clearButton} pauseButton={this.pauseButton}
+                <UniverseSystem clear = {this.state.clear} randomize = {this.state.randomize} gameOfLife = {this.state.gameOfLife} clearButton={this.clearButton} pauseButton={this.pauseButton}
                 stopButton = {this.stopButton} randomButton = {this.randomButton}/>
                 <ButtonContainer>
                 <Button id="playStopButton" onClick={this.rollSimulation}>Play</Button>
