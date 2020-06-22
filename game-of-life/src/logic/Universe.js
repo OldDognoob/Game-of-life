@@ -32,7 +32,6 @@ class Universe extends Component{
             generation: 0,
             clear: false,
             pause: false,
-            stop: false,
             rolling: false,
             gameOfLife: false,
             interval: null,
@@ -71,11 +70,6 @@ class Universe extends Component{
     pauseButton = () => {
         this.setState({pause: !this.state.pause});
     }
-
-    stopButton = () => {
-        this.setState({stop: !this.state.stop});
-    }
-
     randomButton = () => {
         this.setState({randomize: !this.state.randomize});
     }
@@ -91,7 +85,6 @@ class Universe extends Component{
                 <ButtonContainer>
                 <Button id="playStopButton" onClick={this.rollSimulation}>Play</Button>
                 <Button onClick = {this.pauseButton}>Pause</Button>
-                <Button onClick = {this.stopButton}>Stop</Button>
                 <Button onClick = {this.randomButton}>Random</Button>
                 <Button onClick = {this.clearButton}>Clear</Button>
             </ButtonContainer>
