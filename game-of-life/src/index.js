@@ -210,14 +210,10 @@ class Main extends React.Component {
                 <div id="rulesbox">
                 <p id="rules">
                     <strong><u>For a space that is 'populated':</u></strong><br />
-                    Each cell with one or no neighbors dies, as if by solitude.<br />
-                    Each cell with four or more neighbors dies, as if by overpopulation.<br />
+                    If the cell is alive and has 2 or 3 neighbors, then it remains alive. Else it dies.<br />
+                    If the cell is dead and has exactly 3 neighbors, then it comes to life. Else if remains dead.<br />
                     Each cell with two or three neighbors survives.<br />
                 </p>
-                <p id="rules">
-                    <strong><u>For a space that is 'empty' or 'unpopulated'</u></strong><br />
-                    Each cell with three neighbors becomes populated.<br />
-                    </p>
                 </div>
                 <p id="footer">
                     Conway's The Game of Life
@@ -226,7 +222,7 @@ class Main extends React.Component {
         )
     }
 }
-// HELPER FUNCTION FOR DEEP CLONING ARRAYS
+// Helper function for Cloning Arrays
 function arrayClone(arr) {
     return JSON.parse(JSON.stringify(arr))
 }
