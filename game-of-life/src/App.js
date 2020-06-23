@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import styled from 'styled-components';
-import Game from './Components/Game';
+import Universe from './logic/Universe';
 
 const Title = styled.h1`
-  width: 90%;
+  width: 100%;
   size: 15px;
-  height: 10px;
+  height: 50px;
 `;
 
 const Content = styled.div`
@@ -27,16 +26,15 @@ const Rules = styled.div`
   font-weight: bold;
   border: 3px solid yellow;
 `;
-
-
-
 const Button = styled.button`
     height: 25px;
     font-size: 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     border: 2px solid black
 `;
-
+const AboutSection = styled.div`
+  width: 100%;
+`;
 class App extends Component {
   constructor() {
     super();
@@ -56,20 +54,23 @@ class App extends Component {
       <div className="App">
         <Content>
         <Title>Conway's Game of Life</Title>
-          <Game preset={this.state.preset}/>
+        <AboutSection>
+            <h2>About this Algorithm:</h2>
+            <p style={{ color: "black", size: "2px solid black" }}>The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two
+              possible states, alive or dead. Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent.</p>
+            <p>If you would like to learn more about Conway's Game of Life, check out this <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">link!</a></p>
+          </AboutSection>
+          <Universe preset={this.state.preset}/>
           <PresetsContainer>
             <Button onClick={this.initialPreset} value='1'>Preset 1</Button>
             <Button onClick={this.initialPreset} value='2'>Preset 2</Button>
-            <Button onClick={this.initialPreset} value='3'>Preset 3</Button>
-            <Button onClick={this.initialPreset} value='4'>Preset 4</Button>
           </PresetsContainer>
           <Rules className="Rules">
             <h2>Rules:</h2>
             <ul>
-               If the cell is alive and has 2 or 3 neighbors, then it remains alive. Else it dies.
-              If the cell is dead and has exactly 3 neighbors, then it comes to life. Else if remains dead.
+              <li>If the cell is alive and has 2 or 3 neighbors, then it remains alive. Else it dies.</li>
+              <li>If the cell is dead and has exactly 3 neighbors, then it comes to life. Else if remains dead.</li>
             </ul>
-            <h2>About this Algorithm:</h2>
           </Rules>
         </Content>
       </div>

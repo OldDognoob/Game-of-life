@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import UniverseSystem from "./UniverseSystem";
+import UniverseBox from "./UniverseBox";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 400px;
+  width: 362px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 const Header = styled.h2`
-  height: 35px;
+  height: 30px;
   margin-bottom: 15px;
 `;
 const ButtonContainer = styled.div`
@@ -19,8 +19,8 @@ const ButtonContainer = styled.div`
   margin-top: 15px;
 `;
 const Button = styled.button`
-  height: 30px;
-  font-size: 25px;
+  height: 25px;
+  font-size: 20px;
   border-radius: 15px;
   border: 2px solid red;
 `;
@@ -43,7 +43,7 @@ class Universe extends Component{
         this.setState({gameOfLife:!this.state.gameOfLife});
 
         if (running === true) {
-            let interval = setInterval(() => {this.setState({generation: this.state.generation +1})}, 1000);
+            let interval = setInterval(() => {this.setState({generation: this.state.generation +1})}, 100);
             this.setState({interval})
         }
         if (running === false) {
@@ -66,10 +66,6 @@ class Universe extends Component{
     clearButton = () => {
         this.setState({clear: !this.state.clear});
     }
-
-    pauseButton = () => {
-        this.setState({pause: !this.state.pause});
-    }
     randomButton = () => {
         this.setState({randomize: !this.state.randomize});
     }
@@ -80,11 +76,15 @@ class Universe extends Component{
                 <Header>
                     Generation: {this.state.generation}
                 </Header>
-                <UniverseSystem clear = {this.state.clear} randomize = {this.state.randomize} gameOfLife = {this.state.gameOfLife} clearButton={this.clearButton} pauseButton={this.pauseButton}
-                stopButton = {this.stopButton} randomButton = {this.randomButton}/>
+                <UniverseBox 
+                clear = {this.state.clear} 
+                randomize = {this.state.randomize} 
+                gameOfLife = {this.state.gameOfLife} 
+                clearButton={this.clearButton} 
+                stopButton = {this.stopButton} 
+                randomButton = {this.randomButton}/>
                 <ButtonContainer>
                 <Button id="playStopButton" onClick={this.rollSimulation}>Play</Button>
-                <Button onClick = {this.pauseButton}>Pause</Button>
                 <Button onClick = {this.randomButton}>Random</Button>
                 <Button onClick = {this.clearButton}>Clear</Button>
             </ButtonContainer>
