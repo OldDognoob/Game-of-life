@@ -6,14 +6,14 @@ import "./index.css"
 // Which is a child component of Main
 class Box extends React.Component {
     selectBox = () => {
-        this.props.selectBox(this.props.row, this.props.col)
+        this.props.selectBox(this.props.row, this.props.col) // calling the function from the props
     }
     render() {
         return (
             <div
                 className={this.props.boxClass}
                 id={this.props.id}
-                onClick={this.selectBox}
+                onClick={this.selectBox}// at this point we are not passing selectBox as props , because has already a function in the Box component
             />
         )
     }
@@ -21,16 +21,16 @@ class Box extends React.Component {
 // GRID is a  child component of Main
 class Grid extends React.Component {
     render() {
-        // The this,props we are referring bellow is used to reference any properties we want to inherit from the main component below
-        const width = this.props.cols * 16
-        let rowsArr = []
+        // The this.props we are referring bellow is used to reference any properties we want to inherit from the main component below
+        const width = this.props.cols * 16 // the width of the grid passes as props to child component
+        let rowsArr = [] // we initialize an empty array
         let boxClass = ""
 
         for (var i = 0; i < this.props.rows; i++) {
             for (var j = 0; j < this.props.cols; j++) {
-                let boxId = i + "_" + j
+                let boxId = i + "_" + j// here we creating an id to go with every box element
                 boxClass = this.props.gridFull[i][j] ? "box on" : "box off" // Box on and Box off are style classes
-                    rowsArr.push(
+                    rowsArr.push( // we pushing every box component to the row array
                     < Box
                         boxClass = { boxClass }
                         key = { boxId }
@@ -44,7 +44,7 @@ class Grid extends React.Component {
         }
         return (
             <div className="grid" style={{ width: width }}> {/*for style purpose we set the div class to "grid"*/}
-                {rowsArr}
+                {rowsArr} {/* the array of all the rows */}
             </div>
         )
     }
@@ -80,24 +80,29 @@ class Buttons extends React.Component {
 class Main extends React.Component {
     constructor(props) {
         super(props)
+        // the above elements define the variables to start
         this.speed = 100
         this.rows = 30
         this.cols = 50
         this.state = {
             generation: 0,
+            // two things here: 1. we create a big array to filled up with the rows and an arry to fill the colum
+            // ...............: 2. to begin we set of the cell of the grid
             gridFull: Array(this.rows).fill().map(() => Array(this.cols).fill(false))
         }
-    }
+    } // Point of remembering: every cells in order to start needs to be off(false-unselected). 
+      // In order to be true(clicked and revealed) we need to create a method
     selectBox = (row, col) => {
-        let gridCopy = arrayClone(this.state.gridFull) // arrayClone is a helper function defined below
-        gridCopy[row][col] = !gridCopy[row][col]
-        this.setState({ gridFull: gridCopy })
+        let gridCopy = arrayClone(this.state.gridFull) // arrayClone is a helper function defined below. Here we are not updating the starting point but we create a array copy
+        gridCopy[row][col] = !gridCopy[row][col] //the first part says the square of the grid with the exact row and colum set it to true/false
+        this.setState({ gridFull: gridCopy }) // we updating by using the set state
     }
     seed = () => {
-        let gridCopy = arrayClone(this.state.gridFull)
+        let gridCopy = arrayClone(this.state.gridFull)// we copy our grid
+        // looping through every square of our grid to decide which one will be turn on or off
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
-                if (Math.floor(Math.random() * 4) === 1) {
+                if (Math.floor(Math.random() * 4) === 1) {// randomly we are setting whether a square of the grid turns on or not
                     gridCopy[i][j] = true
                 }
             }
@@ -186,8 +191,9 @@ class Main extends React.Component {
                     seed={this.seed}
                     gridSize={this.gridSize}
                     />
-                <Grid 
-                    gridFull={this.state.gridFull} // THESE ARE REACT PROPERTIES BEING SENT ANYWHERE THE GRID COMPONENT IS CALLED
+                <Grid // These are react properties being sent anywhere the grid component is called
+                      // we passing the whole grid , with the rows the colum as props
+                    gridFull={this.state.gridFull} 
                     rows={this.rows}
                     cols={this.cols}
                     selectBox={this.selectBox}
@@ -209,10 +215,18 @@ class Main extends React.Component {
                 <h3>The Rules:</h3>
                 <div id="rulesbox">
                 <p id="rules">
-                    <strong><u>For a space that is 'populated':</u></strong><br />
-                    If the cell is alive and has 2 or 3 neighbors, then it remains alive. Else it dies.<br />
-                    If the cell is dead and has exactly 3 neighbors, then it comes to life. Else if remains dead.<br />
-                    Each cell with two or three neighbors survives.<br />
+                    <strong><u>A simple explanation of Conway's Game of Life</u></strong><br />
+                    Every cell interacts with eight live neighbors, positioned horizontally, vertically or diagonally adjacent.
+                    The following transition occurs by the four rules:<br />
+                    Any live cell with less than two live neighbors dies, as under population.
+                    Any live cell with two or three live neighbors lives on to the next generation.
+                    Any live cell with more than three live neighbors dies, as if by overpopulation.
+                    Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+                    The above rules can compare the behavior of the automaton in real life as:<br />
+                    Everything is depends of weather the cell is alive or dead.<br />
+                    - if the cell is alive and it has exactly 2 or 3 live neighbors around then it remains alive<br />
+                    - if the cell is dead and it has exactly 3 live neighbors then it reborn<br />
+                    - Any other circumstances the cell is dead <br />
                 </p>
                 </div>
                 <p id="footer">
