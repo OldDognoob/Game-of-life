@@ -86,25 +86,36 @@ class Main extends Component {
                 this.rows = 50
         }
         this.clear() // reset the grid after resizing it so it doesn't still contain the old grid elements
-    }
+    }// The main function thats starts our generations, checks every square with the current grid "g" and
+    // creates an another same grid "grid2" used to update the state in every cell generation
     play = () => {
-        let g = this.state.gridFull // we check to see how the grid is looking at
-        let g2 = arrayClone(this.state.gridFull) // we create a copy fo the grit to update a new grid
+        let g = this.state.gridFull // we check to see if we starting from a new empty grid
+        let g2 = arrayClone(this.state.gridFull) // our copy new grid will be update
             
-        // The Game Logic determines which cell born or dies
+        // The Game of Logic
+        // In this game any condition apply to check our live neighbors
+        // The variable count examines the number of our live neighbors
+        // Every square bracket inside info gives to use the coordinates of x,y or row, colum of the live cell
+        // At our game the following coordinates with info can be mentioned:
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 let count = 0;
-                if (i > 0) if (g[i - 1][j]) count++;
-                if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;
-                if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;
-                if (j < this.cols - 1) if (g[i][j + 1]) count++;
-                if (j > 0) if (g[i][j - 1]) count++;
-                if (i < this.rows - 1) if (g[i + 1][j]) count++;
-                if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;
-                if (i < this.rows - 1 && this.cols - 1) if (g[i + 1][j + 1]) count++;
-                if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false; // DIES
-                if (!g[i][j] && count === 3) g2[i][j] = true; // REBORN
+                if (i > 0) if (g[i - 1][j]) count++;//top
+                if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;//top left
+                if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;// top right
+                if (j < this.cols - 1) if (g[i][j + 1]) count++;//right
+                if (j > 0) if (g[i][j - 1]) count++;// left
+                if (i < this.rows - 1) if (g[i + 1][j]) count++;// bottom
+                if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;// bottom left
+                if (i < this.rows - 1 && this.cols - 1) if (g[i + 1][j + 1]) count++;// bottom right
+                // if a live cell is in the grid with coordinates i & j 
+                //and the live neighbors are less than 2 or more than 3 then, 
+                //the cell with coordinates i & j in the grid2 is dead.
+                if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false; 
+                // if the cell with coordinates i & j in the grid its dead 
+                // and the live neighbors are exactly 3 then in the update grid 
+                // the cell with coordinates i & j in the grid becomes a live cell.
+                if (!g[i][j] && count === 3) g2[i][j] = true; 
                 }
         }
         
@@ -157,17 +168,22 @@ class Main extends Component {
                 <div id="rulesbox">
                 <p id="rules">
                     <strong><u>A simple explanation of Conway's Game of Life</u></strong><br />
-                    Every cell interacts with eight live neighbors, positioned horizontally, vertically or diagonally adjacent.
-                    The following transition occurs by the four rules:<br />
-                    Any live cell with less than two live neighbors dies, as under population.
-                    Any live cell with two or three live neighbors lives on to the next generation.
-                    Any live cell with more than three live neighbors dies, as if by overpopulation.
-                    Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-                    The above rules can compare the behavior of the automaton in real life as:<br />
-                    Everything is depends of weather the cell is alive or dead.<br />
-                    - if the cell is alive and it has exactly 2 or 3 live neighbors around then it remains alive<br />
-                    - if the cell is dead and it has exactly 3 live neighbors then it reborn<br />
-                    - Any other circumstances the cell is dead <br />
+                    <br />
+                        Every cell interacts with eight live neighbors, positioned horizontally,vertically or diagonally adjacent.
+                        At the heart of this game the following four rules determine if a cell is live or dead. 
+                    <br />
+                        All depends on how many live neighbor cells are alive. 
+                        The following four rules are:<br />
+                        Any live cell with less than two live neighbors dies, as under population.
+                        Any live cell with two or three live neighbors lives on to the next generation.
+                        Any live cell with more than three live neighbors dies, as if by overpopulation.
+                        Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+                    <br />
+                        The above rules can compare the behavior of the automaton in real life as:
+                    <br />
+                        - if the cell is alive and it has exactly 2 or 3 live neighbors around then it remains alive<br />
+                        - if the cell is dead and it has exactly 3 live neighbors then it reborn<br />
+                        - Any other circumstances the cell is dead <br />
                 </p>
                 </div>
                 <p id="footer">
