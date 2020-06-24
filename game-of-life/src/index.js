@@ -68,7 +68,7 @@ class Buttons extends React.Component {
                     id="size-menu"
                     onChange={this.handleSelect}
                 > {/*We wait for a chance in the drop menu then we send the value of the selected option to the handleSelect Method*/}
-                    <option value="1">20 x 10</option>
+                    <option value="1">25 x 25</option>
                     <option value="2" selected>50 x 30</option>
                     <option value="3"> 70 x 50</option>
                 </select>
