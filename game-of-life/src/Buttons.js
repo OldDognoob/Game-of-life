@@ -15,6 +15,7 @@ class Buttons extends React.Component {
                     <button onClick={this.props.slow}>Slow</button>
                     <button onClick={this.props.fast}>Fast</button>
                     <button onClick={this.props.seed}>Seed</button>
+                    <button onClick={this.props.cross}>Cross</button>
                 <select
                     title="Grid Size"
                     id="size-menu"

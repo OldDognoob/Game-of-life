@@ -35,6 +35,20 @@ class Main extends Component {
         }
         this.setState({ gridFull: gridCopy }) //we update the grid with a random seed
     }
+    cross = () => {
+        let gridCopy = arrayClone(this.state.gridFull);
+        let len = gridCopy.length;
+        len = len % 2 === 0 ? len : len - 1;
+        for (let i = 0; i < this.rows; i++){
+            gridCopy[i][len / 2] = 1;
+            for (let j = 0; j < this.cols; j++){
+            gridCopy[len / 2 - 1][j] = 1;
+            }
+        }
+        this.setState({
+            gridFull: gridCopy
+        });
+        };
     playButton = () => {
         clearInterval(this.intervalId)
         this.intervalId = setInterval(this.play, this.speed) // Every 100ms (this.speed) we will run this.play to update the game state
@@ -115,6 +129,7 @@ class Main extends Component {
                     fast={this.fast}
                     clear={this.clear}
                     seed={this.seed}
+                    cross={this.cross}
                     gridSize={this.gridSize}
                     />
                 <Grid // These are react properties being sent anywhere the grid component is called
