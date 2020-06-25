@@ -87,18 +87,19 @@ class Main extends Component {
         this.clear() // reset the grid after resizing it so it doesn't still contain the old grid elements
     }// The main function thats starts our generations, checks every square with the current grid "g" and
     // creates an another same grid "grid2" used to update the state in every cell generation
-    play = () => {
+    play = () => {// The function that makes the game to work
         let g = this.state.gridFull // we check to see if we starting from a new empty grid
         let g2 = arrayClone(this.state.gridFull) // our copy new grid will be update
             
-        // The Game of Logic
-        // In this game any condition apply to check our live neighbors
-        // The variable count examines the number of our live neighbors
-        // Every square bracket inside info gives to use the coordinates of x,y or row, colum of the live cell
-        // At our game the following coordinates with info can be mentioned:
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
-                let count = 0;
+        //======================== The Game of Logic==============================//
+        // In this game any condition apply to check our live neighbors.
+        // The variable count examines the number of our live neighbors.
+        // Every square bracket inside info gives to us the coordinates of x,y or row, colum of the live cell
+        // For every step in the evolution all cells needs to check their neighbors to see how many are alive or dead.
+        // So looping over all cell to the number of rows and columns through the grid.
+        for (let i = 0; i < this.rows; i++) {// iterate through rows
+            for (let j = 0; j < this.cols; j++) {// iterate through columns
+                let count = 0;// count our alive/dead live neighbors
                 if (i > 0) if (g[i - 1][j]) count++;//top
                 if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;//top left
                 if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;// top right
