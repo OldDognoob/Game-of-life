@@ -174,18 +174,15 @@ class Main extends Component {
                 <p id="rules">
                     <strong><u>A simple explanation of Conway's Game of Life</u></strong><br />
                     <br />
-                        <p>Every cell interacts with eight live neighbors, positioned horizontally,vertically or diagonally adjacent.
-                        At the heart of this game the following four rules determine if a cell is live or dead.</p> 
-                        <p>All depends on how many live neighbor cells are alive.The following four rules are:</p> 
-                        <p>
-                        Any live cell with less than two live neighbors dies, as under population.
-                        Any live cell with two or three live neighbors lives on to the next generation.
-                        Any live cell with more than three live neighbors dies, as if by overpopulation.
-                        Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</p>  
-                        <p>The above rules can compare the behavior of the automaton in real life as:</p>
-                        <p>- Birth:  if the cell is alive and it has exactly 2 or 3 live neighbors around then it remains alive</p>
-                        <p>- Death:  if the cell is dead and it has exactly 3 live neighbors then it reborn</p>
-                        <p>- Stasis: Any other circumstances the cell is dead</p>
+                        <p>Every cell interacts with eight live neighbors, positioned horizontally,vertically or diagonally adjacent.<br></br>
+                        At the heart of this game the following four rules determine if a cell is live or dead.
+                        You can understand this game if you think it as a life simulator or by the official name"cellular automaton".
+                        Where the cells in this discrete model of regular grid the live in a finite state.</p>
+                        <p>In order to play this game you need to follow a set of four rules explained bellow:</p> 
+                        <p>1.Any live cell with less than two live neighbors dies, as under population.</p>
+                        <p>2.Any live cell with two or three live neighbors lives on to the next generation.</p>
+                        <p>3.Any live cell with more than three live neighbors dies, as if by overpopulation.</p>
+                        <p>4.Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction </p>
                 </p>
                 </div>
                 <p id="footer">
