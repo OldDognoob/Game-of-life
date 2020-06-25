@@ -92,7 +92,7 @@ class Main extends Component {
         let g = this.state.gridFull // we check to see if we starting from a new empty grid
         let g2 = arrayClone(this.state.gridFull) // our copy new grid will be update
             
-        //======================== The Game of Logic==============================//
+        //======================== The Game of Life==============================//
         // The variable count examines the number of our live neighbors.
         // Every square bracket inside info gives to us the coordinates of x,y or row, colum of the live cell
         //=======================================================================//
