@@ -38,6 +38,7 @@ class Main extends Component {
     cross = () => {
         let gridCopy = arrayClone(this.state.gridFull);
         let len = gridCopy.length;
+        len = len % 2 === 0 ? len : len - 1;
         for (let i = 0; i < this.rows; i++){
             gridCopy[i][len / 2] = 1;
             for (let j = 0; j < this.cols; j++){
